@@ -25,24 +25,73 @@ const cartReducer = (state = initState, action) => {
   //INSIDE HOME COMPONENT
   if (action.type === ADD_TO_CART) {
     // Add code here
-  }
+    return {
+      ...state,
+      items: state.items.map(item =>
+        item.id === action.id ? {...item, selected: true} : item,
+      ),};
+};
+
   if (action.type === REMOVE_ITEM) {
     // Add code here
-  }
+    return {
+      ...state,
+      items: state.items.map(item =>
+        item.id === action.id
+          ? {...item, selected: false, quantity: 1}
+          : item,
+      ),};
+  };
+
   //INSIDE CART COMPONENT
   if (action.type === ADD_QUANTITY) {
     // Add code here
-  }
+    return {
+      ...state,
+      items: state.items.map(item =>
+        item.id === action.id
+          ? {...item, quantity: item.quantity + 1}
+          : item,
+      ),};
+  };
   if (action.type === SUB_QUANTITY) {
     // Add code here
-  }
+    return {
+      ...state,
+      items: state.items.map(item =>
+        item.id === action.id
+          ? {
+              ...item,
+              quantity: item.quantity !== 1 ? item.quantity - 1 : 1,
+            }
+          : item,
+      ),};
+  };
 
   if (action.type === ADD_SHIPPING) {
     // Add code here (OPTIONAL)
+    return {
+      ...state,
+      items: state.items.map(item =>
+        item.id === action.id
+          ? {...item, quantity: item.quantity + 1}
+          : item,
+      ),
+    };
   }
 
   if (action.type === SUB_SHIPPING) {
     // Add code here (OPTIONAL)
+    return {
+      ...state,
+      items: state.items.map(item =>
+        item.id === action.id
+          ? {
+              ...item,
+              shipping: item.shipping !== 6 ? item.shipping - 6 : 6,
+            }
+          : item,
+      ),};
   }
 
   else {
